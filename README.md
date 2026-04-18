@@ -95,7 +95,7 @@ open index.html
 
 ## 👤 Автор
 
-**Oleg Piddubnyy** — засновник [Colorit](https://colorit.ua), підприємець, Одеса 🇺🇦
+**Oleg Piddubnyy** — засновник [Colorit](https://shop.colorit.org.ua), підприємець, Одеса 🇺🇦
 
 [![Threads](https://img.shields.io/badge/Threads-@piddubnyy.oleg-black?style=flat-square&logo=threads)](https://www.threads.net/@piddubnyy.oleg)
 
