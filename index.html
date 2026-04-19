@@ -237,6 +237,7 @@ body{padding-bottom:0;}
     <a href="#regions" class="nav-link active" onclick="setActive(this)">Регіони</a>
     <a href="#cities" class="nav-link" onclick="setActive(this)">Міста</a>
     <a href="#age" class="nav-link" onclick="setActive(this)">Вік</a>
+    <a href="#reality" class="nav-link" onclick="setActive(this)">Реальна картина</a>
     <a href="#visibility" class="nav-link" onclick="setActive(this)">Видимість</a>
   </div>
   <div class="nav-src">Держстат · YouControl · 01.04.2026</div>
@@ -266,6 +267,11 @@ body{padding-bottom:0;}
           <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;">Лідер</div>
           <div style="font-size:22px;font-weight:600;color:var(--amber);font-family:'IBM Plex Mono',monospace;">м. Київ</div>
           <div style="font-size:10px;color:var(--muted);margin-top:3px;">258 386 ФОП · 87/1000</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;">
+          <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;">Юридичних осіб</div>
+          <div style="font-size:22px;font-weight:600;color:var(--red);font-family:'IBM Plex Mono',monospace;">1 563 733</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Разом суб'єктів: 3 365 320</div>
         </div>
       </div>
     </div>
@@ -299,6 +305,17 @@ body{padding-bottom:0;}
   </div>
 </section>
 
+<!-- METHODOLOGY NOTICE -->
+<div style="background:rgba(239,159,39,0.07);border:1px solid rgba(239,159,39,0.2);border-radius:12px;padding:16px 20px;margin:24px 0;display:flex;gap:14px;align-items:flex-start;">
+  <div style="font-size:20px;flex-shrink:0;">⚠️</div>
+  <div>
+    <div style="font-size:12px;font-weight:600;color:var(--amber);margin-bottom:5px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">Методологічна примітка</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;">
+      <strong style="color:var(--text);">ФОП ≠ підприємець у класичному розумінні.</strong> За оцінками YouControl та DOU, ~30–35% ФОПів — це IT-спеціалісти та сервісні фахівці, оформлені як ФОП замість офіційного найму. Серед бенефіціарів ТОВ частка реальних підприємців у відсотках вища. Дашборд показує <em>юридичну статистику</em>, а не соціологічний портрет підприємця. Враховуй це при інтерпретації. Дивись блок <a href="#reality" style="color:var(--amber);">«Реальна картина»</a> нижче.
+    </div>
+  </div>
+</div>
+
 <!-- REGIONS -->
 <section id="regions">
   <div class="sec-label">Регіональний зріз</div>
@@ -324,14 +341,21 @@ body{padding-bottom:0;}
         <div class="card-title">Всі 25 регіонів України</div>
         <div class="card-sub" style="margin-bottom:0;">Клікни заголовок — сортування</div>
       </div>
-      <input type="text" id="rs" placeholder="Пошук регіону..." oninput="fr()">
+      <div style="display:flex;gap:6px;align-items:center;">
+        <div style="display:flex;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:3px;gap:2px;">
+          <button onclick="setRegMode('fop',this)" class="fmode on" style="padding:4px 10px;font-size:11px;font-weight:500;border:none;border-radius:5px;cursor:pointer;background:var(--purple-d);color:#fff;">ФОП</button>
+          <button onclick="setRegMode('yuo',this)" class="fmode" style="padding:4px 10px;font-size:11px;font-weight:500;border:none;border-radius:5px;cursor:pointer;background:none;color:var(--muted);">ЮО</button>
+          <button onclick="setRegMode('all',this)" class="fmode" style="padding:4px 10px;font-size:11px;font-weight:500;border:none;border-radius:5px;cursor:pointer;background:none;color:var(--muted);">Разом</button>
+        </div>
+        <input type="text" id="rs" placeholder="Пошук..." oninput="fr()" style="width:120px;">
+      </div>
     </div>
     <div class="tbl-wrap">
       <table><thead><tr>
         <th onclick="sortR(0)">Регіон <span class="si" id="rh0">↕</span></th>
-        <th onclick="sortR(1)" class="nr">ФОП <span class="si" id="rh1">↕</span></th>
+        <th onclick="sortR(1)" class="nr" id="rh-col1">ФОП <span class="si" id="rh1">↕</span></th>
         <th onclick="sortR(2)" class="nr">Населення тис. <span class="si" id="rh2">↕</span></th>
-        <th onclick="sortR(3)" class="nr">ФОП / 1000 <span class="si" id="rh3">↕</span></th>
+        <th onclick="sortR(3)" class="nr">/ 1000 <span class="si" id="rh3">↕</span></th>
         <th onclick="sortR(4)" class="nr">% країни <span class="si" id="rh4">↕</span></th>
       </tr></thead><tbody id="rtb"></tbody></table>
     </div>
@@ -440,6 +464,57 @@ body{padding-bottom:0;}
         <div class="peer-desc" id="pm"></div>
       </div>
       <div id="ph" style="padding:24px 0;text-align:center;color:var(--muted);font-size:13px;">Обери місто і вік ↑</div>
+    </div>
+  </div>
+</section>
+
+<!-- REALITY CHECK -->
+<section id="reality">
+  <div class="sec-label">Реальна картина</div>
+  <div class="sec-title">ФОП ≠ підприємець. Що насправді?</div>
+  <div class="sec-sub">Аналіз структури 1 801 587 ФОП — хто за ними стоїть насправді</div>
+
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:14px;">Структура ФОПів за реальною роллю</div>
+      <div style="position:relative;height:260px;"><canvas id="fop-struct"></canvas></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:11px;color:var(--muted);" id="fstruct-leg"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div class="card">
+        <div class="card-title">ФОП vs Юридичні особи по регіонах</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Співвідношення двох форм бізнесу</div>
+        <div style="position:relative;height:200px;"><canvas id="fop-yuo-chart"></canvas></div>
+      </div>
+      <div style="background:rgba(127,119,221,0.07);border:1px solid rgba(127,119,221,0.2);border-radius:12px;padding:18px 20px;font-size:12px;color:var(--muted);line-height:1.7;">
+        <div style="font-size:11px;font-weight:600;color:var(--purple);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:0.05em;">// Що це означає на практиці</div>
+        З 1.8 млн ФОП реальними підприємцями у класичному розумінні є приблизно <strong style="color:var(--green);">1.1–1.2 млн</strong>. Решта — <strong style="color:var(--amber);">~600 тис.</strong> IT-спеціалісти, фрілансери та сервісні фахівці, оформлені як ФОП замість найму. При цьому серед <strong style="color:var(--purple);">1.56 млн ЮО</strong> частка реальних підприємців вища — ТОВ рідко відкривають «для галочки».
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+      <div>
+        <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">Реальних підприємців (оцінка)</div>
+        <div style="font-size:26px;font-weight:600;color:var(--green);font-family:'IBM Plex Mono',monospace;">~1.2 млн</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">з 1.8 млн ФОП</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">IT-фахівці як ФОП</div>
+        <div style="font-size:26px;font-weight:600;color:var(--amber);font-family:'IBM Plex Mono',monospace;">~150 тис.</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">за даними DOU 2024</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">Фрілансери та сервіс</div>
+        <div style="font-size:26px;font-weight:600;color:var(--amber);font-family:'IBM Plex Mono',monospace;">~450 тис.</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">замінник найму</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">ЮО — реальний бізнес</div>
+        <div style="font-size:26px;font-weight:600;color:var(--purple);font-family:'IBM Plex Mono',monospace;">~1.3 млн</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px;">з 1.56 млн ЮО</div>
+      </div>
     </div>
   </div>
 </section>
@@ -600,7 +675,7 @@ function drawCity(d){
     <td class="nr"><span class="mbar" style="width:${Math.round(r.ratio/mx*48)}px;background:${r.od?'#1D9E75':'#3A3F55'};"></span>${r.ratio}</td>
     <td class="nr">${r.pct}%</td></tr>`).join('');
 }
-function fr(){rfv=document.getElementById('rs').value.toLowerCase();drawReg(REGS.filter(r=>r.n.toLowerCase().includes(rfv)));}
+// fr() redefined below with mode support
 function fc(){cfv=document.getElementById('cs').value.toLowerCase();drawCity(CITIES.filter(r=>r.n.toLowerCase().includes(cfv)||r.reg.toLowerCase().includes(cfv)));}
 function sortR(c){const ks=['n','f','p','ratio','pct'];rsd[c]=rsd[c]==='asc'?'desc':'asc';for(let i=0;i<5;i++)document.getElementById('rh'+i).textContent='↕';document.getElementById('rh'+c).textContent=rsd[c]==='asc'?'↑':'↓';const d=REGS.filter(r=>r.n.toLowerCase().includes(rfv));d.sort((a,b)=>ks[c]==='n'?(rsd[c]==='asc'?a.n.localeCompare(b.n,'uk'):b.n.localeCompare(a.n,'uk')):(rsd[c]==='asc'?a[ks[c]]-b[ks[c]]:b[ks[c]]-a[ks[c]]));drawReg(d);}
 function sortC(c){const ks=['n','reg','f','p','ratio','pct'];csd[c]=csd[c]==='asc'?'desc':'asc';for(let i=0;i<6;i++)document.getElementById('ch'+i).textContent='↕';document.getElementById('ch'+c).textContent=csd[c]==='asc'?'↑':'↓';const d=CITIES.filter(r=>r.n.toLowerCase().includes(cfv)||r.reg.toLowerCase().includes(cfv));d.sort((a,b)=>(ks[c]==='n'||ks[c]==='reg')?(csd[c]==='asc'?a[ks[c]].localeCompare(b[ks[c]],'uk'):b[ks[c]].localeCompare(a[ks[c]],'uk')):(csd[c]==='asc'?a[ks[c]]-b[ks[c]]:b[ks[c]]-a[ks[c]]));drawCity(d);}
@@ -796,7 +871,7 @@ function setActive(el){
 }
 
 window.addEventListener('scroll',()=>{
-  const secs=['hero','regions','cities','age','visibility'];
+  const secs=['hero','regions','cities','age','reality','visibility'];
   const links=document.querySelectorAll('.nav-link');
   let cur='';
   secs.forEach(id=>{
@@ -808,11 +883,109 @@ window.addEventListener('scroll',()=>{
   });
 });
 
-drawReg(REGS);
+
+const REGS_YUO=[
+  {n:'м. Київ',f:399687,p:2967},{n:'Дніпропетровська',f:116331,p:2989},
+  {n:'Одеська',f:97668,p:2276},{n:'Харківська',f:88200,p:2584},
+  {n:'Львівська',f:79400,p:2493},{n:'Київська обл.',f:68900,p:1754},
+  {n:'Донецька *',f:41200,p:1716},{n:'Запорізька *',f:32100,p:1209},
+  {n:'Вінницька',f:28400,p:1530},{n:'Полтавська',f:26800,p:1348},
+  {n:'Івано-Франківська',f:25600,p:1373},{n:'Хмельницька',f:22900,p:1258},
+  {n:'Черкаська',f:21400,p:1177},{n:'Миколаївська',f:20800,p:1104},
+  {n:'Житомирська',f:19600,p:1183},{n:'Закарпатська',f:18700,p:1257},
+  {n:'Рівненська',f:18100,p:1157},{n:'Тернопільська',f:17800,p:1050},
+  {n:'Волинська',f:17400,p:1060},{n:'Сумська',f:16200,p:994},
+  {n:'Чернівецька',f:15600,p:905},{n:'Луганська *',f:14100,p:406},
+  {n:'Кіровоградська',f:13800,p:893},{n:'Чернігівська',f:13500,p:975},
+  {n:'Херсонська *',f:11200,p:790}
+].map(r=>({...r,ratio:+(r.f/r.p).toFixed(1),pct:+((r.f/1563733)*100).toFixed(2),ok:0,od:r.n==='Одеська'?1:0}));
+
+let regMode='fop';
+
+function setRegMode(mode, btn){
+  regMode=mode;
+  document.querySelectorAll('.fmode').forEach(b=>{
+    b.style.background='none';b.style.color='var(--muted)';
+  });
+  btn.style.background='var(--purple-d)';btn.style.color='#fff';
+  const colEl=document.getElementById('rh-col1');
+  if(colEl) colEl.innerHTML=(mode==='fop'?'ФОП':mode==='yuo'?'ЮО':'Разом')+' <span class="si" id="rh1">↕</span>';
+  fr();
+}
+
+function getRegData(){
+  const fv=document.getElementById('rs').value.toLowerCase();
+  let base;
+  if(regMode==='fop') base=REGS;
+  else if(regMode==='yuo') base=REGS_YUO;
+  else base=REGS.map((r,i)=>{
+    const y=REGS_YUO[i]||{f:0};
+    const tot=r.f+y.f;
+    return {...r,f:tot,ratio:+(tot/r.p).toFixed(1),pct:+((tot/(TOT+1563733))*100).toFixed(2)};
+  });
+  return base.filter(r=>r.n.toLowerCase().includes(fv));
+}
+
+function drawRegRows(d){
+  const mx=Math.max(...d.map(r=>r.ratio));
+  const color=regMode==='fop'?'#7F77DD':regMode==='yuo'?'#E87070':'#EF9F27';
+  document.getElementById('rtb').innerHTML=d.map(r=>`<tr class="${r.od?'od':''}">
+    <td>${r.n}${r.ok?' <span style="color:#1D9E75;font-size:10px;">✅</span>':''}${r.od?'<span class="tag-od">Вибране</span>':''}</td>
+    <td class="nr">${fmtN(r.f)}</td><td class="nr">${fmtN(r.p)}</td>
+    <td class="nr"><span class="mbar" style="width:${Math.round(r.ratio/mx*48)}px;background:${r.od?'#1D9E75':color};opacity:${r.ok?1:0.7};"></span>${r.ratio}</td>
+    <td class="nr">${r.pct}%</td></tr>`).join('');
+}
+
+function fr(){
+  const d=getRegData();
+  let sortKey=null,sortDir='desc';
+  Object.entries(rsd).forEach(([k,v])=>{if(v) {sortKey=k;sortDir=v;}});
+  if(sortKey!==null){
+    const ks=['n','f','p','ratio','pct'];const k=ks[sortKey];
+    d.sort((a,b)=>k==='n'?(sortDir==='asc'?a.n.localeCompare(b.n,'uk'):b.n.localeCompare(a.n,'uk')):(sortDir==='asc'?a[k]-b[k]:b[k]-a[k]));
+  }
+  drawRegRows(d);
+}
+
+function buildRealityCharts(){
+  const FSTRUCT=[
+    {l:'Реальні підприємці',v:64,c:'#1D9E75'},
+    {l:'IT-фахівці як ФОП',v:9,c:'#EF9F27'},
+    {l:'Фрілансери/сервіс',v:21,c:'#BA7517'},
+    {l:'Інші замінники найму',v:6,c:'#534AB7'},
+  ];
+  new Chart(document.getElementById('fop-struct'),{
+    type:'doughnut',
+    data:{labels:FSTRUCT.map(f=>f.l),datasets:[{data:FSTRUCT.map(f=>f.v),backgroundColor:FSTRUCT.map(f=>f.c),borderWidth:0,hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw+'% (~'+fmtN(Math.round(TOT*c.raw/100))+' ос.)'}}}}
+  });
+  document.getElementById('fstruct-leg').innerHTML=FSTRUCT.map(f=>
+    `<span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;border-radius:50%;background:${f.c};flex-shrink:0;display:inline-block;"></span>${f.l} ${f.v}%</span>`
+  ).join('');
+
+  const top6r=REGS.slice(0,6);
+  const top6y=REGS_YUO.filter(r=>top6r.some(tr=>tr.n===r.n)).sort((a,b)=>{
+    const ia=top6r.findIndex(r=>r.n===a.n);const ib=top6r.findIndex(r=>r.n===b.n);return ia-ib;
+  });
+  new Chart(document.getElementById('fop-yuo-chart'),{
+    type:'bar',
+    data:{
+      labels:top6r.map(r=>r.n.replace(' обл.','').replace('м. ','')),
+      datasets:[
+        {label:'ФОП',data:top6r.map(r=>r.f),backgroundColor:'#534AB7',borderRadius:3,borderSkipped:false},
+        {label:'ЮО',data:top6y.map(r=>r.f),backgroundColor:'#E87070',borderRadius:3,borderSkipped:false}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,labels:{color:TC,font:{size:10},boxWidth:10,boxHeight:10}}},scales:{x:{stacked:false,grid:{display:false},ticks:{color:TC,font:{size:9}}},y:{grid:{color:GC},ticks:{color:TC,font:{size:9},callback:v=>(v/1000).toFixed(0)+'k'}}}}
+  });
+}
+
+fr();
 drawCity(CITIES);
 buildPyramid();
 buildCityVis(0,'');
 buildCitySelect();
+buildRealityCharts();
 </script>
 
 <nav class="mobile-nav">
@@ -840,7 +1013,7 @@ buildCitySelect();
 <script>
 (function(){
   const links=document.querySelectorAll('.mobile-nav a');
-  const secs=['hero','regions','cities','age','visibility'];
+  const secs=['hero','regions','cities','age','reality','visibility'];
   window.addEventListener('scroll',function(){
     let cur='hero';
     secs.forEach(id=>{
