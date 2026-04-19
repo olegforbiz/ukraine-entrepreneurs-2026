@@ -523,7 +523,7 @@ body{padding-bottom:0;}
 <section id="visibility">
   <div class="sec-label">Перехресне дослідження</div>
   <div class="sec-title">Піраміда видимості підприємця</div>
-  <div class="sec-sub">Скільки з 1 801 587 ФОП є публічними — ведуть соцмережі, тусуються в спільнотах, виступають на заходах</div>
+  <div class="sec-sub">База — 1 801 587 ФОП (фізичні особи). Власники ЮО частково перетинаються: одна людина може мати і ФОП і ТОВ одночасно, тому механічне додавання 1.56 млн ЮО дало б подвійний рахунок. Загальна кількість суб'єктів господарювання в Україні: <strong style="color:var(--text);">3 365 320</strong></div>
 
   <div class="grid-4" style="margin-bottom:24px;">
     <div class="stat-card p" style="padding:16px;">
@@ -548,10 +548,35 @@ body{padding-bottom:0;}
     </div>
   </div>
 
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;">
+      <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">Суб'єктів всього в UA</div>
+      <div style="font-size:22px;font-weight:600;color:var(--text);font-family:'IBM Plex Mono',monospace;">3 365 320</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">ФОП + ЮО разом</div>
+    </div>
+    <div style="background:var(--card);border:1px solid rgba(239,159,39,0.25);border-radius:12px;padding:16px 18px;">
+      <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">Перетин ФОП + ЮО</div>
+      <div style="font-size:22px;font-weight:600;color:var(--amber);font-family:'IBM Plex Mono',monospace;">~400 тис.</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">одна людина має і ФОП і ТОВ</div>
+    </div>
+    <div style="background:var(--card);border:1px solid rgba(127,119,221,0.25);border-radius:12px;padding:16px 18px;">
+      <div style="font-size:10px;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;">Унікальних підприємців (оцінка)</div>
+      <div style="font-size:22px;font-weight:600;color:var(--purple);font-family:'IBM Plex Mono',monospace;">~2.5 млн</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;">без подвійного рахунку</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(127,119,221,0.06);border:1px solid rgba(127,119,221,0.18);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;gap:14px;align-items:flex-start;">
+    <div style="font-size:18px;flex-shrink:0;">🔍</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.7;">
+      <strong style="color:var(--text);">Чому піраміда рахує тільки ФОП?</strong> ФОП — завжди конкретна фізична особа з обличчям і акаунтом. ЮО — юридична оболонка: за одним ТОВ може стояти 1, 3 або 10 людей, найманий директор, або взагалі холдинг. Публічна людина яка має і ФОП і ТОВ — вже врахована в піраміді один раз. Якщо додати ЮО механічно — отримаємо подвійний рахунок і некоректні відсотки. <strong style="color:var(--purple);">Реальних унікальних підприємців в Україні — приблизно 2.5 млн</strong>, але точних даних без перетину немає навіть у Держстаті.
+    </div>
+  </div>
+
   <div class="grid-2" style="gap:20px;margin-bottom:20px;">
     <div class="card">
       <div class="card-title">Піраміда видимості — клікни для деталей</div>
-      <div class="click-hint">// натисни на рядок щоб відкрити опис</div>
+      <div class="click-hint">// база: 1 801 587 ФОП · власники ЮО частково вже тут</div>
       <div id="pyr"></div>
     </div>
 
@@ -567,7 +592,7 @@ body{padding-bottom:0;}
         <div class="comm-row"><span class="comm-name"><span class="cdot" style="background:#378ADD;"></span>Board (ментори)</span><span style="color:#378ADD;font-weight:600;font-family:'IBM Plex Mono',monospace;">195</span><span style="color:var(--muted);">~$800</span><span style="color:var(--muted);font-size:10px;">Mentor</span></div>
         <div class="comm-row"><span class="comm-name"><span class="cdot" style="background:#8E44AD;"></span>СУП</span><span style="color:#8E44AD;font-weight:600;font-family:'IBM Plex Mono',monospace;">300+</span><span style="color:var(--muted);">~$500</span><span style="color:var(--muted);font-size:10px;">Assoc.</span></div>
         <div class="comm-row"><span class="comm-name"><span class="cdot" style="background:var(--muted);"></span>JCI Ukraine</span><span style="color:var(--muted);font-weight:600;font-family:'IBM Plex Mono',monospace;">2 000+</span><span style="color:var(--muted);">безк.</span><span style="color:var(--muted);font-size:10px;">Open</span></div>
-        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);">Разом в преміум: <span style="color:var(--purple);font-weight:600;">~3 200 ос.</span> = <span style="color:var(--purple);">0.18% всіх ФОП</span></div>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);">Разом в преміум: <span style="color:var(--purple);font-weight:600;">~3 200 ос.</span> = <span style="color:var(--purple);">0.18% ФОП</span> або <span style="color:var(--muted);">0.13% від 2.5 млн унікальних підприємців</span></div>
       </div>
 
       <div class="insight" id="smallworld-box">
