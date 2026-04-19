@@ -1,4 +1,4 @@
-# 🇺🇦 Підприємці України 2026 — Аналітичний дашборд
+# 🇺🇦 Підприємці України 2026 — Легкий аналітичний дашборд
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-live-1D9E75?style=flat-square&logo=github)
 ![Data](https://img.shields.io/badge/Дані-Держстат%20UA-534AB7?style=flat-square)
